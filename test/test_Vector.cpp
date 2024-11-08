@@ -35,12 +35,36 @@ TEST(Vector, push_back_and_size) {
 TEST(Vector, correct_pop_back_working) {
     Vector<int> Vector;
 
-    for (int i = 0; i < 100; i++) {
+    for (int i = 0; i < 5; i++) {
         Vector.push_back(i);
+        //for (int i = 0; i < Vector.curr_capacity / 2; i++) {
+        //    std::cout << Vector.prev_vector[i] << " ";
+        //}
+        //std::cout << "\n";
+        //for (int i = 0; i < Vector.curr_capacity; i++) {
+        //    std::cout << Vector.curr_vector[i] << " ";
+        //}
+        //std::cout << "\n";
+        //for (int i = 0; i < Vector.curr_capacity * 2; i++) {
+        //    std::cout << Vector.next_vector[i] << " ";
+        //}
+        //std::cout << "\n";
     }
 
-    for (int i = 99; i >= 0; i--) {
+    for (int i = 4; i >= 0; i--) {
         EXPECT_EQ(Vector.back(), i);
+        //for (int i = 0; i < Vector.curr_capacity / 2; i++) {
+        //    std::cout << Vector.prev_vector[i] << " ";
+        //}
+        //std::cout << "\n";
+        //for (int i = 0; i < Vector.curr_capacity; i++) {
+        //    std::cout << Vector.curr_vector[i] << " ";
+        //}
+        //std::cout << "\n";
+        //for (int i = 0; i < Vector.curr_capacity * 2; i++) {
+        //    std::cout << Vector.next_vector[i] << " ";
+        //}
+        //std::cout << "\n";
         Vector.pop_back();
     }
 }

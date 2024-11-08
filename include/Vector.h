@@ -1,7 +1,9 @@
 #pragma once
 
+#include <iostream>
+
 template <typename VectorType> class Vector {
-private:
+public:
 
 	VectorType* prev_vector = nullptr; // curr_capacity / 2
 	VectorType* curr_vector = nullptr; // curr_capacity
@@ -134,11 +136,12 @@ public:
 		++curr_sz;
 
 		if (prev_sz == 0) {
-			next_vector[next_sz] = curr_vector[next_sz];
-			next_vector[next_sz + 1] = curr_vector[next_sz + 1];
+			std::swap(next_vector[next_sz], curr_vector[next_sz]);
+			std::swap(next_vector[next_sz + 1], curr_vector[next_sz + 1]);
 			next_sz += 2;
 		}
 		else {
+			std::swap(prev_vector[prev_sz - 1], curr_vector[prev_sz - 1]);
 			--prev_sz;
 		}
 
@@ -165,10 +168,12 @@ public:
 		--curr_sz;
 
 		if (next_sz != 0) {
+			std::swap(next_vector[next_sz - 1], curr_vector[next_sz - 1]);
+			std::swap(next_vector[next_sz - 2], curr_vector[next_sz - 2]);
 			next_sz -= 2;
 		}
 		else {
-			prev_vector[prev_sz] = curr_vector[prev_sz];
+			std::swap(prev_vector[prev_sz], curr_vector[prev_sz]);
 			++prev_sz;
 		}
 
