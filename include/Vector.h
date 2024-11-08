@@ -38,6 +38,12 @@ public:
 		construct(this);
 	}
 
+	Vector(int size, const VectorType& value) {
+		for (int i = 0; i < size; i++) {
+			push_back(value);
+		}
+	}
+
 	~Vector() {
 		destruct(this);
 	}
@@ -190,6 +196,37 @@ public:
 			prev_sz = 0;
 			next_sz = 0;
 		}
+	}
+
+	VectorType& operator[](int index) {
+		if (index >= size() || index < 0) {
+			throw std::out_of_range("Vector index out of range!");
+		}
+		if (index + 1 < prev_sz) {
+			return prev_vector[index + 1];
+		}
+		if (index + 1 < next_sz) {
+			return next_vector[index + 1];
+		}
+		return curr_vector[index + 1];
+	}
+
+	const VectorType& operator[](int index) const {
+		if (index >= size() || index < 0) {
+			throw std::out_of_range("Vector index out of range!");
+		}
+		if (index + 1 < prev_sz) {
+			return prev_vector[index + 1];
+		}
+		if (index + 1 < next_sz) {
+			return next_vector[index + 1];
+		}
+		return curr_vector[index + 1];
+	}
+
+	void clear() {
+		destruct(this);
+		construct(this);
 	}
 
 	VectorType back() const {

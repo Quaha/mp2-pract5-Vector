@@ -228,6 +228,74 @@ TEST(Vector, combination_of_push_and_pop_2) {
     }
 }
 
+TEST(Vector, access_elements_using_bracket_operator) {
+    Vector<int> Vector;
+    Vector.push_back(10);
+    Vector.push_back(20);
+    Vector.push_back(30);
+
+    EXPECT_EQ(Vector[0], 10);
+    EXPECT_EQ(Vector[1], 20);
+    EXPECT_EQ(Vector[2], 30);
+}
+
+TEST(Vector, modify_elements_using_bracket_operator) {
+    Vector<int> Vector;
+    Vector.push_back(5);
+    Vector.push_back(15);
+
+    Vector[0] = 50;
+    Vector[1] = 150;
+
+    EXPECT_EQ(Vector[0], 50);
+    EXPECT_EQ(Vector[1], 150);
+}
+
+TEST(Vector, const_access_using_bracket_operator) {
+    Vector<int> vector;
+    vector.push_back(100);
+    vector.push_back(200);
+
+    const Vector<int>& ConstVector = vector;
+
+    EXPECT_EQ(ConstVector[0], 100);
+    EXPECT_EQ(ConstVector[1], 200);
+}
+
+TEST(Vector, out_of_bounds_access_throws_exception) {
+    Vector<int> Vector;
+    Vector.push_back(1);
+    Vector.push_back(2);
+
+    EXPECT_THROW(Vector[2], std::out_of_range);
+    EXPECT_THROW(Vector[100], std::out_of_range);
+}
+
+TEST(Vector, access_elements_after_resizing) {
+    Vector<int> vector;
+    vector.push_back(42);
+    vector.push_back(84);
+
+    EXPECT_EQ(vector[0], 42);
+    EXPECT_EQ(vector[1], 84);
+
+    vector.push_back(168);
+    vector.push_back(336);
+
+    EXPECT_EQ(vector[2], 168);
+    EXPECT_EQ(vector[3], 336);
+    EXPECT_EQ(vector.size(), 4);
+}
+
+TEST(Vector, negative_index_access_throws_exception) {
+    Vector<int> vector;
+    vector.push_back(10);
+    vector.push_back(20);
+
+    ASSERT_ANY_THROW(vector[-1]);
+    ASSERT_ANY_THROW(vector[5]);
+}
+
 TEST(Vector, stress_test_push_and_pop) {
     std::srand(time(0));
 
